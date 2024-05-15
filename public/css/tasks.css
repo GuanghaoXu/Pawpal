@@ -1,0 +1,40 @@
+.nav-item {
+  margin-left: 15px;
+  /* 增加左边距 */
+}
+
+#CriteriaSelectionArea {
+  background-color: rgba(255, 255, 255, 0.2);
+  /* 白色背景，50% 透明度 */
+  border: none;
+  padding: 8px 15px;
+}
+
+.TaskSelectionArea {
+  background-color: rgba(255, 255, 255, 0.5);
+  /* 白色背景，50% 透明度 */
+  border: none;
+  padding: 8px 15px;
+}
+
+.TaskCard:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Or any other gray color you prefer */
+  cursor: pointer; /* Optional: changes the mouse cursor on hover */
+}
+
+/* 滚动条整体样式 */
+.scrollable-container::-webkit-scrollbar {
+  width: 10px; /* 设置滚动条的宽度 */
+}
+
+/* 滚动条滑块 */
+.scrollable-container::-webkit-scrollbar-thumb {
+  background: #b3b3b3; /* 滚动条滑块的颜色 */
+  border-radius: 5px; /* 滚动条滑块的圆角 */
+}
+
+/* 滚动条轨道 */
+.scrollable-container::-webkit-scrollbar-track {
+  background: #e0e0e0; /* 滚动条轨道的颜色 */
+  border-radius: 5px; /* 滚动条轨道的圆角 */
+}

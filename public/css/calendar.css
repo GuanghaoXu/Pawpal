@@ -1,0 +1,110 @@
+.CalendarMainContentArea{
+  width: 100%;
+  height: auto;
+  color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 4px black solid; */
+}
+
+.calendar {
+  width: 100%;
+  height: auto;
+  background-color: #222227;
+  color: #fff;
+}
+
+.month {
+  width: 100%;
+  height: auto;
+  background: linear-gradient(300deg, #ca8145, #ff9462);
+  background-size: 300% 300%;
+  animation: gradient-animation 18s ease infinite;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  text-align: center;
+  text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.month i {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.month h1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+.month p {
+  font-size: 1rem;
+}
+
+.weekdays {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 确保间距平均 */
+}
+
+.weekdays div {
+  display: flex; /* 新增：设置display为flex */
+  justify-content: center; /* 新增：确保水平居中 */
+  align-items: center; /* 新增：确保垂直居中 */
+  flex: 1;
+  min-width: calc((100% / 7) - 0.6rem); /* 计算宽度，减去margin的空间 */
+}
+
+
+
+.days {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.2rem;
+}
+
+.days div {
+  font-size: 1rem;
+  text-align: center; /* 文本居中对齐 */
+  flex: 1; /* 同样，每个元素都有相等的空间 */
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+  transition: background-color 0.2s;
+  margin: 0.3rem; /* 保持外边距 */
+  margin-bottom: 0.3rem; /* 新增的底部外边距 */
+  margin-top: 0.5rem; /* 新增的底部外边距 */
+  min-width: calc((100% / 7) - 0.6rem); /* 计算宽度，减去margin的空间 */
+}
+
+.days div:hover:not(.today) {
+  background-color: #e0d4d4;
+  cursor: pointer;
+}
+
+.prev-date, .next-date {
+  opacity: 0.2;
+}
+
+.today {
+  background-color: #ca8145;
+}
+
+.event-day {
+  opacity: 1;
+}
+
+.not-event-day {
+  opacity: 0.2; /* Optional: Change the text color to improve contrast */
+}

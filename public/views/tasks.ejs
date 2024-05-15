@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/tasks.css"/>
+  <link rel="stylesheet" href="css/calendar.css"/>
+</head>
+
+<body class="min-h-full gradient-background">
+  <section class="gradient-background" id="menuBar">
+    <div class="container-fluid">   <!-- width adaptable container -->
+    <nav class="navbar navbar-expand-lg navbar-light"> <!-- navbar classes included -->
+        <a class="navbar-brand" href="/profile"><img src="images/pawpal.png" width="150"></a>  
+        <ul class="navbar-nav mr-auto"> <!-- margin-right auto means left justifying -->
+          <li class="nav-item">
+              <a class="nav-link" href="/tasks">Tasks</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/progress">Progress</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <input type="text" id="searchBox" placeholder="Search here">
+            <button class="btn my-2 my-sm-0" id="searchButton">Search</button>
+        </ul>
+        <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Log Out</a>
+        </li>
+        </ul>
+    </nav>
+    </div>
+</section>
+
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <!-- Criteria Selection Sidebar -->
+      <div class="col-md-2 py-4 d-flex flex-column" id="CriteriaSelectionArea"
+        style="min-height: 100vh; border-right: 1px solid rgba(200, 200, 200, 0.5);">
+        <!-- padding yp and down -->
+        <div class="px-3">
+          <!-- padding left and right -->
+          <h6 style="font-weight: bold; font-style: italic;">Duration:</h6>
+          <select class="form-control mb-3" id="durationFilter">
+            <!-- bottom margin 3-->
+            <option>All Durations</option>
+            <option>Short</option>
+            <option>Medium</option>
+            <option>Long</option>
+          </select>
+          <h6 style="font-weight: bold; font-style: italic;">Urgency:</h6>
+          <select class="form-control mb-3" id="urgencyFilter">
+            <option>All Tasks</option>
+            <option>Urgent</option>
+            <option>Normal</option>
+            <option>Low Priority</option>
+          </select>
+          <button class="btn btn-primary w-100" id="applyFilters">Apply Filters</button>
+
+          <!-- Calendar Section -->
+          <div class="calendar" style="margin-top: 5vh;">
+            <div class="month">
+                <i class="fas fa-angle-left 
+                prev"></i>
+                <div class="date">
+                    <h1></h1>
+                    <p></p>
+                </div>
+                <i class="fas fa-angle-right 
+                next"></i>
+            </div>
+            <div class="weekdays">
+                <div>Su</div>
+                <div>Mo</div>
+                <div>Tu</div>
+                <div>We</div>
+                <div>Th</div>
+                <div>Fr</div>
+                <div>Sa</div>
+            </div>
+            <div class="days"></div>
+          </div>
+          
+          <!-- New Task -->
+          <% if (user.administrator) { %>
+            <br><br>
+            <h6 style="font-weight: bold;">Administrative - Task Creation:</h6>
+            <form id="loginButton">
+              <div class="form-group">
+                <label for="inputTitle" style="font-weight: bold; font-style: italic;">Set Title</label>
+                <input type="text" class="form-control" id="inputTitle" required>
+              </div>
+              <div class="form-group">
+                <label for="inputDescription" style="font-weight: bold; font-style: italic;">Set Description</label>
+                <input type="text" class="form-control" id="inputDescription" required>
+              </div>
+            </form>
+            <h6 style="font-weight: bold; font-style: italic;">Set Duration:</h6>
+            <select class="form-control mb-3" id="inputDuration">
+              <option>Short</option>
+              <option>Medium</option>
+              <option>Long</option>
+            </select>
+            <h6 style="font-weight: bold; font-style: italic;">Set Urgency:</h6>
+            <select class="form-control mb-3" id="inputUrgency">
+              <option>Urgent</option>
+              <option>Normal</option>
+              <option>Low Priority</option>
+            </select>
+            <h6 style="font-weight: bold; font-style: italic;">Start:</h6>
+            <select class="form-control mb-3" id="inputStart">
+              <option value="00:00">12AM</option>
+              <option value="01:00">1AM</option>
+              <option value="02:00">2AM</option>
+              <option value="03:00">3AM</option>
+              <option value="04:00">4AM</option>
+              <option value="05:00">5AM</option>
+              <option value="06:00">6AM</option>
+              <option value="07:00">7AM</option>
+              <option value="08:00">8AM</option>
+              <option value="09:00">9AM</option>
+              <option value="10:00">10AM</option>
+              <option value="11:00">11AM</option>
+              <option value="12:00">12PM</option>
+              <option value="13:00">1PM</option>
+              <option value="14:00">2PM</option>
+              <option value="15:00">3PM</option>
+              <option value="16:00">4PM</option>
+              <option value="17:00">5PM</option>
+              <option value="18:00">6PM</option>
+              <option value="19:00">7PM</option>
+              <option value="20:00">8PM</option>
+              <option value="21:00">9PM</option>
+              <option value="22:00">10PM</option>
+              <option value="23:00">11PM</option>
+            </select>
+            <h6 style="font-weight: bold; font-style: italic;">End:</h6>
+            <select class="form-control mb-3" id="inputEnd">
+              <option value="00:00">12AM</option>
+              <option value="01:00">1AM</option>
+              <option value="02:00">2AM</option>
+              <option value="03:00">3AM</option>
+              <option value="04:00">4AM</option>
+              <option value="05:00">5AM</option>
+              <option value="06:00">6AM</option>
+              <option value="07:00">7AM</option>
+              <option value="08:00">8AM</option>
+              <option value="09:00">9AM</option>
+              <option value="10:00">10AM</option>
+              <option value="11:00">11AM</option>
+              <option value="12:00">12PM</option>
+              <option value="13:00">1PM</option>
+              <option value="14:00">2PM</option>
+              <option value="15:00">3PM</option>
+              <option value="16:00">4PM</option>
+              <option value="17:00">5PM</option>
+              <option value="18:00">6PM</option>
+              <option value="19:00">7PM</option>
+              <option value="20:00">8PM</option>
+              <option value="21:00">9PM</option>
+              <option value="22:00">10PM</option>
+              <option value="23:00">11PM</option>
+            </select>
+            <button class="btn btn-primary w-100 create-task">Create Task</button>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="col-md-10" id = "MainContentArea">
+        <!-- Current Period Container -->
+        <div class="card mt-3 TaskSelectionArea">
+          <h6 class="mt-2">
+            Current Period
+          </h6>
+          <div class="row" id="CurrentTaskContainer"></div>
+        </div>
+
+        <div class="card mt-3 TaskSelectionArea">
+          <h6 class="mt-2">
+            All Tasks
+          </h6>
+          <div class="row" id="taskContainer"></div>
+        </div>
+
+        <!-- Additional rows and cards can be added following the same pattern -->
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="js/tasks.js"></script>
+  <script src="js/calendar.js"></script>
+  <script>
+  $(document).ready(function() {
+    $.ajax({
+      url: '/api/tasks', // Ensure that this URL matches your backend routing
+      type: 'GET',
+      dataType: 'json', // Expected data type to be returned from the server
+      success: function(tasks) {
+        $('#taskContainer').empty();
+
+        // Dynamically create task cards and add them to the page
+        tasks.forEach(function(task) {
+          var taskCard = `
+            <div class="col-md-4 mb-3 task-card ${task.urgency}" data-taskid="${task._id}">
+              <div class="card TaskCard">
+                <div class="card-header">${task.title}</div>
+                <div class="card-body">
+                  <h5 class="card-title">${task.urgency} Task</h5>
+                  <p class="card-text">${task.description}</p>
+                  <button class="btn btn-primary accept-task" data-id="${task._id}">Accept</button>
+                  <% if (user.administrator) { %>
+                  <button class="btn btn-danger delete-task" data-id="${task._id}">Delete</button>
+                  <% } %>
+                </div>
+              </div>
+            </div>`;
+          if(task.acceptance == false){  // none accept tasks will show
+            $('#taskContainer').append(taskCard); 
+            var startHour = parseInt(task.PeriodStart.split(':')[0], 10);
+            var endHour = parseInt(task.PeriodEnd.split(':')[0], 10);
+            var currentHour = new Date().getHours();
+            // For current period area
+            if (startHour <= endHour) {
+                // situation 1: not cross midnight
+                if (currentHour >= startHour && currentHour < endHour) {
+                    $('#CurrentTaskContainer').append(taskCard);
+                }
+            } else {
+                // situation 2: cross midnight
+                if (currentHour >= startHour || currentHour < endHour) {
+                    $('#CurrentTaskContainer').append(taskCard);
+                }
+            }
+          }
+        });
+        $(document).on('click', '.accept-task', function() {
+          var taskId = $(this).data('id'); //.data() visit the value of "data-*", "id" replace the *
+          $(this).html(
+              '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+          )
+          acceptTask(taskId); 
+        });
+        $(document).on('click', '.delete-task', function() {
+          var taskId = $(this).data('id'); //.data() visit the value of "data-*", "id" replace the *
+          $(this).html(
+              '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+          )
+          deleteTask(taskId); 
+        });
+        $(document).on('click', '.create-task', function() {
+          $(this).html(
+              '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+          )
+          createTask();
+        });
+      },
+      error: function(xhr, status, error) {
+        console.error("Error fetching tasks: ", error);
+      }
+    });
+  });
+
+  function acceptTask(taskId) {
+    $.ajax({
+      url: '/api/tasks/accept/' + taskId,
+      type: 'POST',
+      dataType: 'json',
+      success: function(response) {
+        $('.task-card').filter(function() {
+          return $(this).data('taskid') === taskId;
+        }).fadeOut('slow', function() { 
+          $(this).remove();
+        });
+        for (let i = 0; i < events.length; i++) {
+          if (events[i].id === taskId) {
+            events.splice(i, 1);
+            break; // 找到匹配项，退出循环
+          }
+        }
+        renderCalendar();
+      },
+      error: function(xhr, status, error) {
+        console.error("Error accepting task: ", error);
+      }
+    });
+  }
+
+  function createTask() {
+    let taskTitle = document.getElementById('inputTitle').value;
+    let taskDescription = document.getElementById('inputDescription').value;
+    let taskDuration = document.getElementById('inputDuration').value;
+    let taskUrgency = document.getElementById('inputUrgency').value;
+    let taskStart = document.getElementById('inputStart').value;
+    let taskEnd = document.getElementById('inputEnd').value;
+    console.log(taskStart);
+    $.ajax({
+      url: '/api/tasks/create/',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        title: taskTitle,
+        description: taskDescription,
+        urgency: taskUrgency,
+        duration: taskDuration,
+        periodStart: taskStart,
+        periodEnd: taskEnd,
+        taskDate: selectedDate
+      },
+      success: function(response) {
+        window.location.href = '/tasks';
+      },
+      error: function(xhr, status, error) {
+        console.error("Error creating task: ", error);
+      }
+    });
+  }
+
+  function deleteTask(taskId) {
+    $.ajax({
+      url: '/api/tasks/delete/' + taskId,
+      type: 'POST',
+      dataType: 'json',
+      success: function(response) {
+        $('.task-card').filter(function() {
+          return $(this).data('taskid') === taskId;
+        }).fadeOut('slow', function() { 
+          $(this).remove();
+        });
+        for (let i = 0; i < events.length; i++) {
+          if (events[i].id === taskId) {
+            events.splice(i, 1);
+            break; // 找到匹配项，退出循环
+          }
+        }
+        renderCalendar();
+      },
+      error: function(xhr, status, error) {
+        console.error("Error deleting task: ", error);
+      }
+    });
+  }
+  </script>
+</body>
+
+</html>
